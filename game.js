@@ -20,16 +20,16 @@ function playRound(playerSelection, computerSelection){
     if (playerSelection == computerSelection){
         return ('Draw!');
     }
-    else if (playerSelection == 'rock'){
-        if (computerSelection == 'paper'){return ('Paper beats rock! You lose!');}
+    else if (playerSelection === 'rock'){
+        if (computerSelection === 'paper'){return ('Paper beats rock! You lose!');}
         else {return ('Rock beats scissors! You win!');}
     }
-    else if (playerSelection == 'paper'){
-        if (computerSelection = 'rock'){return ('Paper beats rock! You win!');}
+    else if (playerSelection === 'paper'){
+        if (computerSelection === 'rock'){return ('Paper beats rock! You win!');}
         else {return ('Scissors beats paper! You lose!');}
     }
     else {
-        if (computerSelection == 'rock'){return ('Rock beats scissors! You lose!');}
+        if (computerSelection === 'rock'){return ('Rock beats scissors! You lose!');}
         else {return ('Scissors beats paper! You win!');}
     }
     }
@@ -54,7 +54,7 @@ function getPlayerChoice(){
 function game(){
     const seriesLength = 5;
     //regular expression variable that will be used to match a winning round
-    const winex = new RegExp('*win!$'); 
+    const winex = new RegExp('win!'); 
     
     let playerScore = 0;
     let computerScore = 0;
@@ -89,6 +89,7 @@ function game(){
         //Show current score at end of round
         console.log('Player:' + playerScore);
         console.log('Computer: ' + computerScore);
+
     }
         
 }
