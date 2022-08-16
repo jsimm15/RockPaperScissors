@@ -1,3 +1,4 @@
+//Selects random number between 0-2 and assigns rock, paper, or scissors
 function getComputerChoice(){
     let computerChoice = '';
     switch(Math.floor(Math.random()*3)){
@@ -13,6 +14,8 @@ function getComputerChoice(){
     return computerChoice;
 }
 
+//Compares player and computer selections, returns string corresponding to win condition
+//Returned strings end in either 'Draw!', 'win!', or 'lose!'
 function playRound(playerSelection, computerSelection){
     if (playerSelection == computerSelection){
         return ('Draw!');
@@ -31,6 +34,7 @@ function playRound(playerSelection, computerSelection){
     }
     }
 
+//Continously prompts user for input until valid response received. Case insensitive
 function getPlayerChoice(){
     let validInput = 'False';
     do{
@@ -44,37 +48,51 @@ function getPlayerChoice(){
     while(validInput === 'False');
 }
 
+//Simulates a round of games of length seriesLength. Only games that end in 
+//win or lose count towards number of games played. Currently prompts user for
+//all player selections at start of game
 function game(){
     const seriesLength = 5;
-    const winex = new RegExp('*win!$');
+    //regular expression variable that will be used to match a winning round
+    const winex = new RegExp('*win!$'); 
     
     let playerScore = 0;
     let computerScore = 0;
     
+    //Perform seriesLength number of simulations
     for (let counter = 1; counter <= seriesLength; counter++){
         
+        //Allow new input for each game
         let playerSelection = getPlayerChoice();
         let computerSelection = getComputerChoice();
 
         console.log(playerSelection);
         console.log(computerSelection);
 
+        //Simulate round
         let result = playRound(playerSelection, computerSelection);
-
         console.log(result);
+
+        //Determine result from playRound return value
+        //If draw, do not count towards number of games played
         if (result === 'Draw!'){
             counter--;
         }
+        //tests for string ending in 'win!'
         else if (winex.test(result)) {
             playerScore++;
         }
+        //If not draw or win, assume loss
         else {
             computerScore++;
         }
+        //Show current score at end of round
         console.log('Player:' + playerScore);
         console.log('Computer: ' + computerScore);
     }
         
 }
 
+
+//Run game
 game();
