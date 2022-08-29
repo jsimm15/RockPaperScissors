@@ -1,0 +1,32 @@
+h1 {
+text-align: center;
+}
+
+#buttonPanel {
+    margin: 100px;
+    display: flex;
+    padding: 10px;
+    justify-content: space-evenly;
+}
+
+#buttonPanel > button {
+    padding: 75px;
+    border-radius: 25px;
+    font-size: x-large;
+}
+#summary, #result {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+#gameOver {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+}
+#restart {
+    display: hidden;
+}
