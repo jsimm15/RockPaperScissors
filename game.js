@@ -80,18 +80,31 @@ function printScore(playerScore, computerScore){
 }
 
 //Check for endgame condition, update page elements 
-function checkEndGame(playerScore, computerScore){    
-    const VICTORY = 5; //Game ends when one player reaches this number of wins
-    let gameOverScreen = document.getElementById('gameOver');
+function checkEndGame(playerScore, computerScore, winCondition){    
+    let gameOverScreen = document.getElementById('buttonPanel');
     let buttons = document.querySelectorAll('button');
-
-    if (playerScore >= 5){
-        gameOverScreen.innerText = 'Game Over! You win!';
+    let br = document.querySelector('br');
+    let h = document.querySelector('h1');
+    
+    
+    
+    if (playerScore >= winCondition){
+        let winGameMessage = document.createElement('p');
+        winGameMessage.innerText = 'Game Over! You won!!!'
+        winGameMessage.style.color = 'green';
+        gameOverScreen.id = 'gameOver';
+        gameOverScreen.appendChild(winGameMessage);
+     
+        h.innerText = 'WINNER!';
         buttons.forEach((button) => button.remove());
         playAgain();
     }
-    else if (computerScore >= 5){
-        gameOverScreen.innerText = 'Game Over! You lose!';
+    else if (computerScore >= winCondition){
+        let loseGameMessage = document.createElement('p');
+        loseGameMessage.innerText = 'Game Over! You lost...'
+        loseGameMessage.style.color = 'red';
+        gameOverScreen.appendChild(loseGameMessage);
+        h.innerText = 'OH NO...'
         buttons.forEach((button) => button.remove());
         playAgain();
     }
@@ -114,11 +127,16 @@ function game(){
     let computerScore = 0;
     let result = '';
     let scores = [];
+    //Set number of wins needed for Victory condition
+    const VICTORY = 5;
     //Selectors for input buttons and result <div>
     let selectRock = document.getElementById('rock');
     let selectPaper = document.getElementById('paper');
     let selectScissors = document.getElementById('scissors');
     let resultMessage = document.getElementById('result');
+
+    //Set starting result to show number of wins needed
+    resultMessage.innerText = `First player to ${VICTORY} wins!!!`
 
     //Play a round based on user input, post result, update score, endcheck
     //Needed nested function in order to keep track of global score
@@ -131,7 +149,7 @@ function game(){
         playerScore = scores[0];
         computerScore = scores[1];
         printScore(playerScore, computerScore);
-        checkEndGame(playerScore, computerScore);
+        checkEndGame(playerScore, computerScore, VICTORY);
     }
     //Add functionality to Selection buttons
     selectRock.addEventListener('click', () => shoot('rock'));
